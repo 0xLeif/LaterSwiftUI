@@ -12,26 +12,46 @@ import Later
 class FetcherObject: ObservableObject {
     @Published var value: String = "Fetching..."
     
-    init() {
-        fetch()
+    lazy var fetchTask = Later.scheduleRepeatedTask(delay: .seconds(5)) { (task) in
+        Later
+            .main {
+                self.value = "Fetching Again..."
+                
+        }
+            .and
+            .fetch(url: URL(string: "https://scontent-dfw5-2.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/117229741_311067766680366_4524756043560145576_n.jpg?_nc_ht=scontent-dfw5-2.cdninstagram.com&_nc_cat=106&_nc_ohc=cz0h_b8haQcAX9-Mb9g&oh=c729112c167da8bf01fc1e8164c8089a&oe=5F5B76BF")!)
+            .map { (data, _, _) in
+                data!
+        }
+        .whenSuccess { (data) in
+            
+            Later
+                .main {
+                    self.value = String(data: data,
+                                        encoding: .utf8) ?? "-1"
+            }
+        }
     }
     
-    func fetch() {
-        Later
-            .main { self.value = "Fetching Again..." }
-            .and
-            .do(withDelay: 3) {
-                Later.fetch(url: URL(string: "https://jsonplaceholder.typicode.com/todos/\(Int.random(in: 1 ... 100))")!)
-                    .whenSuccess { (data, _, _) in
-                        guard let data = data else {
-                            return
-                        }
-                        
-                        Later
-                            .main { self.value = String(data: data, encoding: .utf8) ?? "-1" }
-                            .and
-                            .do(withDelay: 5, work: self.fetch)
+    init() {
+        print("Starting Task: \(fetchTask)")
+        
+        Later.scheduleTask(in: .seconds(50)) {
+            print("10 Seconds before cancelled!")
+            var count = 10
+            Later.scheduleRepeatedTask(delay: .seconds(1)) { (task) in
+                if count == 0 {
+                    task.cancel()
                 }
+                print(count)
+                count -= 1
+            }
+        }
+        
+        
+        let cancelTask = Later
+            .scheduleTask(in: .minutes(1)) { [weak self] in
+                self?.fetchTask.cancel()
         }
     }
 }
@@ -41,37 +61,6 @@ struct ContentView: View {
     
     var body: some View {
         Text(object.value)
-            .onAppear {
-                Later
-                    .do {
-                        print("Do First")
-                        sleep(10)
-                        print("Finish first")
-                }
-                    .when { event in
-                        event
-                            .whenComplete { _ in
-                                print("Do After")
-                        }
-                }
-                .do {
-                    print("Do Something Else")
-                    sleep(3)
-                    print("Fin 3")
-                }
-                .and
-                .do {
-                    print("Do Something Else")
-                    sleep(1)
-                    print("fin 1")
-                }
-                .and
-                .do {
-                    print("Finally do")
-                    sleep(4)
-                    print("fin 4")
-                }
-        }
     }
 }
 

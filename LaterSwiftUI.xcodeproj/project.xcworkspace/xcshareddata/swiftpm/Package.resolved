@@ -5,9 +5,9 @@
         "package": "Later",
         "repositoryURL": "https://github.com/0xLeif/Later",
         "state": {
-          "branch": "develop",
-          "revision": "db8b507f0707b3671e169e76a6cf824b9dde6f77",
-          "version": null
+          "branch": null,
+          "revision": "3bf693f6a9f91d5713e9fca3a2a804382bcb642f",
+          "version": "0.1.0"
         }
       },
       {
