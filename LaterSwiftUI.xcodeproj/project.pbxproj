@@ -25,6 +25,7 @@
 		2901015624DCD5CA0032F5DB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2901015924DCD5CA0032F5DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2901015B24DCD5CA0032F5DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29E1E1D324E345DC00DF1167 /* LaterSwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LaterSwiftUI.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 		2901014C24DCD5C90032F5DB /* LaterSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				29E1E1D324E345DC00DF1167 /* LaterSwiftUI.entitlements */,
 				2901014D24DCD5C90032F5DB /* AppDelegate.swift */,
 				2901014F24DCD5C90032F5DB /* SceneDelegate.swift */,
 				2901015124DCD5C90032F5DB /* ContentView.swift */,
@@ -292,6 +294,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LaterSwiftUI/LaterSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"LaterSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 8M8SAX62V2;
@@ -303,6 +306,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ol.LaterSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -312,6 +316,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LaterSwiftUI/LaterSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"LaterSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 8M8SAX62V2;
@@ -323,6 +328,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ol.LaterSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

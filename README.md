@@ -11,14 +11,14 @@ class FetcherObject: ObservableObject {
     @Published var value: String = "Fetching..."
     
     init() {
-        print("init")
         fetch()
     }
     
     func fetch() {
         Later
-            .main { self.value = "Fetching Again..." }
-            .then
+            .main {
+                self.value = "Fetching Again..." }
+            .and
             .do(withDelay: 3) {
                 Later.fetch(url: URL(string: "https://jsonplaceholder.typicode.com/todos/\(Int.random(in: 1 ... 100))")!)
                     .whenSuccess { (data, _, _) in
@@ -27,9 +27,11 @@ class FetcherObject: ObservableObject {
                         }
                         
                         Later
-                            .main { self.value = String(data: data, encoding: .utf8) ?? "-1" }
-                            .then
-                            .do(withDelay: 5, work: self.fetch)
+                            .main {
+                                self.value = String(data: data, encoding: .utf8) ?? "-1"
+                        }
+                        .and
+                        .do(withDelay: 5, work: self.fetch)
                 }
         }
     }
